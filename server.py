@@ -1,6 +1,7 @@
 from tornado import httpserver, ioloop
 from urlparse import urlparse
 import cgi
+import CourseReqProcessor
 
 message = None
 
@@ -13,13 +14,13 @@ def parseArg(uri):
     print 'parsedQuery: ', parsedQuery
 
 def handle_request(request):
-   message = "You requested %s\n" % request.uri
    requestUri = request.uri
    if(requestUri.startswith('/course_req/api?')):
-       message += "you are right"
-       parseArg(request.uri)
-   #f = open(request.uri, 'r')
-   #message = f.read()
+       htmlPage = CourseReqProcessor.getCourseHtmlPage(request.body)
+       #print htmlPage
+       message = CourseReqProcessor.parseHtmlPage(htmlPage)
+       print message
+       
    request.write("HTTP/1.1 200 OK\r\nContent-Length: %d\r\n\r\n%s" % (
 	                   len(message), message))
    request.finish()

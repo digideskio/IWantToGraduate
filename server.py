@@ -13,13 +13,14 @@ def parseArg(uri):
     parsedQuery = cgi.parse_qs(parsedUri.query)
     print 'parsedQuery: ', parsedQuery
 
+
 def handle_request(request):
    requestUri = request.uri
+   message = 'welcome'
    if(requestUri.startswith('/course_req/api?')):
        htmlPage = CourseReqProcessor.getCourseHtmlPage(request.body)
-       #print htmlPage
        message = CourseReqProcessor.parseHtmlPage(htmlPage)
-       print message
+       #print message
        
    request.write("HTTP/1.1 200 OK\r\nContent-Length: %d\r\n\r\n%s" % (
 	                   len(message), message))

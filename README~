@@ -1,3 +1,65 @@
+<h1>sample json response from my server:</h1>
+   /*
+             * {
+                   "courses":[
+                      {
+                         "spaceAvailable":5,
+                         "meetingsDay":"Th",
+                         "courseTitle":"PRE-CORE EAR TRAIN (VLPA)",
+                         "courseSection":"F",
+                         "notes":"Entry Code required",
+                         "courseTitleLink":"http://www.washington.edu/students/crscat/music.html#music113",
+                         "sln":17366,
+                         "meetingsTime":"9:30 -10:20",
+                         "slnLink":"https://sdb.admin.washington.edu/timeschd/UWNetID/sln.asp?QTRYR=AUT+2012&SLN=17366",
+                         "campus":"Seattle"
+                      },
+                      {
+                         "spaceAvailable":2,
+                         "meetingsDay":"M W  F",
+                         "courseTitle":"SURVEY OF MUSIC (VLPA)",
+                         "courseSection":"A",
+                         "notes":"Entry Code required",
+                         "courseTitleLink":"http://www.washington.edu/students/crscat/music.html#music120",
+                         "credits":5.0,
+                         "sln":17379,
+                         "meetingsTime":"9:30 -10:20",
+                         "slnLink":"https://sdb.admin.washington.edu/timeschd/UWNetID/sln.asp?QTRYR=AUT+2012&SLN=17379",
+                         "campus":"Seattle"
+                      },
+                      {
+                         "spaceAvailable":4,
+                         "meetingsDay":"MTWThF",
+                         "courseTitle":"SECOND-YEAR NORW (VLPA)",
+                         "courseSection":"A",
+                         "courseTitleLink":"http://www.washington.edu/students/crscat/norweg.html#norw201",
+                         "credits":5.0,
+                         "sln":17687,
+                         "meetingsTime":"9:30 -10:20",
+                         "slnLink":"https://sdb.admin.washington.edu/timeschd/UWNetID/sln.asp?QTRYR=AUT+2012&SLN=17687",
+                         "campus":"Seattle"
+                      },
+                      {
+                         "spaceAvailable":9,
+                         "meetingsDay":"MTWThF",
+                         "courseTitle":"INTERMEDIATE TAGALOG (VLPA)",
+                         "courseSection":"A",
+                         "courseTitleLink":"http://www.washington.edu/students/crscat/taglg.html#taglg201",
+                         "credits":5.0,
+                         "sln":20254,
+                         "meetingsTime":"9:30 -10:20",
+                         "slnLink":"https://sdb.admin.washington.edu/timeschd/UWNetID/sln.asp?QTRYR=AUT+2012&SLN=20254",
+                         "campus":"Seattle"
+                      }
+                   ],
+                   "hasNextPage":false
+                }
+             */
+
+
+
+
+
 
 
 //sample java json entity

@@ -1,0 +1,148 @@
+//sample json response from my server:
+   /*
+             * {
+                   "courses":[
+                      {
+                         "spaceAvailable":5,
+                         "meetingsDay":"Th",
+                         "courseTitle":"PRE-CORE EAR TRAIN (VLPA)",
+                         "courseSection":"F",
+                         "notes":"Entry Code required",
+                         "courseTitleLink":"http://www.washington.edu/students/crscat/music.html#music113",
+                         "sln":17366,
+                         "meetingsTime":"9:30 -10:20",
+                         "slnLink":"https://sdb.admin.washington.edu/timeschd/UWNetID/sln.asp?QTRYR=AUT+2012&SLN=17366",
+                         "campus":"Seattle"
+                      },
+                      {
+                         "spaceAvailable":2,
+                         "meetingsDay":"M W  F",
+                         "courseTitle":"SURVEY OF MUSIC (VLPA)",
+                         "courseSection":"A",
+                         "notes":"Entry Code required",
+                         "courseTitleLink":"http://www.washington.edu/students/crscat/music.html#music120",
+                         "credits":5.0,
+                         "sln":17379,
+                         "meetingsTime":"9:30 -10:20",
+                         "slnLink":"https://sdb.admin.washington.edu/timeschd/UWNetID/sln.asp?QTRYR=AUT+2012&SLN=17379",
+                         "campus":"Seattle"
+                      },
+                      {
+                         "spaceAvailable":4,
+                         "meetingsDay":"MTWThF",
+                         "courseTitle":"SECOND-YEAR NORW (VLPA)",
+                         "courseSection":"A",
+                         "courseTitleLink":"http://www.washington.edu/students/crscat/norweg.html#norw201",
+                         "credits":5.0,
+                         "sln":17687,
+                         "meetingsTime":"9:30 -10:20",
+                         "slnLink":"https://sdb.admin.washington.edu/timeschd/UWNetID/sln.asp?QTRYR=AUT+2012&SLN=17687",
+                         "campus":"Seattle"
+                      },
+                      {
+                         "spaceAvailable":9,
+                         "meetingsDay":"MTWThF",
+                         "courseTitle":"INTERMEDIATE TAGALOG (VLPA)",
+                         "courseSection":"A",
+                         "courseTitleLink":"http://www.washington.edu/students/crscat/taglg.html#taglg201",
+                         "credits":5.0,
+                         "sln":20254,
+                         "meetingsTime":"9:30 -10:20",
+                         "slnLink":"https://sdb.admin.washington.edu/timeschd/UWNetID/sln.asp?QTRYR=AUT+2012&SLN=20254",
+                         "campus":"Seattle"
+                      }
+                   ],
+                   "hasNextPage":false
+                }
+             */
+
+
+
+
+
+
+
+//sample java json entity
+JSONObject jEntity = new JSONObject();
+        try {
+            //specify the quarter and the year try to search
+            jEntity.append("QTRYR", "AUT 2012");
+            
+            /*
+             * 1: Visual, Literary & Performing Arts Courses (VLPA)
+             * 2: Individual and Society Courses (I&S)
+             * 3: Nature World Courses (NW)
+             * 4: Writing Courses (W)
+             * 5: English Composition Courses (C)
+             * 6: Quantitative, Symbolic or Formal Reasoning Courses (QSR)
+             */
+            jEntity.append("REQ", "1");
+            
+            //time has to be in the format like 0830 which stands for 8:30am
+            
+            //this stands for the start time of the class has to be later than 08:30am
+            //this number has the range between 0830 to 1900. Only support 0830, 0900, 0930..., do not use 0920 or something like that
+            jEntity.append("STARTTIME", "0830");
+            
+            //this stands for the end time of the class has to be earlier than 18:30
+            //this number has range between 0930 to 2000. ends with 30 or 00
+            jEntity.append("ENDTIME", "1830");
+            
+            //the course has to have credits more than or equal to 0
+            //this number has range 0-5, 0 stands for any credit range(which means the user 
+            //doesn't care about credit the course has)
+            jEntity.append("STARTCREDIT", "0");
+            
+            //the course has to have credits less than or equal to 25
+            //this number has range 0-5, 0 stands for any credit range(which means the user 
+            //doesn't care about credit the course has)
+
+            jEntity.append("ENDCREDIT", "5");
+            
+            //the course number can be 000, 100, 200, 300, 400
+            //000 stands for any
+            jEntity.append("STARTCOURSE", "000");
+            
+            //the course number can be 000, 199, 299, 399, 499
+            //000 stands for any
+            jEntity.append("ENDCOURSE", "499");
+            
+            //three campus supported. If you want to search in this campus, set the value to be true,
+            //otherwise, set the value to false or do not include this key-value pair
+            jEntity.append("SEATTLE", true);
+            jEntity.append("BOTHELL", false);
+//            jEntity.append("TACOMA", false);
+
+            
+            /*
+             * IMPORTANT: things get tricky here
+             * Since the searching takes super long time, the uw webpage only returns 20 courses per page. 
+             * If there are more courses in next page, the json string my server returns contains an 
+             * element: "hasNextPage":true, otherwise, the value if false. So you can tell whether there is
+             * next page or not based on the boolean value of this key.
+             * If you want to get next page, what you can do it set "NEXTPAGE" below to be true, then, find
+             * the last course that my server returned, in the sample above the course 
+             * is ("courseTitle":"INTERMEDIATE TAGALOG (VLPA)"), and set "NEXTSLN" to be this course's sln, 
+             * "NEXTTIME" to be the start time of this course
+             */
+            jEntity.append("NEXTPAGE", true);
+            jEntity.append("NEXTSLN", "20254");
+            jEntity.append("NEXTTIME", "0930");
+            
+            /*
+             * few searching options are available, you can exclude some courses:
+             * a. courses with entry code: "ENTRYCODE"
+             * b. courses has pre-request: "PREREQCODE"
+             * c. course has registration restrictions: "REGRESCODE", 
+             * 
+             * if you prefer to exclude these courses, set the value to be true or do
+             * not include this key-value pair
+             */
+            jEntity.append("ENTRYCODE", true);
+            jEntity.append("PREREQCODE", false);
+            jEntity.append("REGRESCODE", true);
+            
+            
+        } catch (JSONException excp) {
+            excp.printStackTrace();
+        }

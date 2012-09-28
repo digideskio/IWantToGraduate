@@ -1,4 +1,12 @@
+library you may need to use to run java:
+httpclient: from apache
+httpclient-cache: from apache
+httpclientcore: from apache
+java-json: library suggested by json official website
+
+
 sample json response from my server:
+
    /*
              * {
                    "courses":[

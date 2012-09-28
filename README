@@ -1,4 +1,4 @@
-<h1>sample json response from my server:</h1>
+sample json response from my server:
    /*
              * {
                    "courses":[
@@ -62,7 +62,7 @@
 
 
 
-<h1>sample java json entity</h1>
+sample java json entity:
 JSONObject jEntity = new JSONObject();
         try {
             //specify the quarter and the year try to search
